@@ -5,9 +5,9 @@
 
 ## Integrantes
 
-- [Nome completo] — [usuário GitHub]
-- [Nome completo] — [usuário GitHub]
-- [Nome completo] — [usuário GitHub]
+- [José Vitor da Rosa] — [j0se-R]
+- [Kauã Kovalski de Campos] — [Kovalskiiii]
+- [Emanuel Muller Bueno] — [Emanuel-Muller]
 
 ## Problema investigado
 
@@ -24,9 +24,9 @@ e segmentação de caracteres individuais antes de qualquer etapa de reconhecime
 Sistemas de reconhecimento automático de placas (ALPR — *Automatic License Plate
 Recognition*) são amplamente utilizados em contextos como controle de acesso a
 estacionamentos, fiscalização de trânsito (radares, pedágios) e sistemas de
-monitoramento urbano. O projeto não pretende produzir um sistema comercial, mas sim
-uma versão simplificada e didática, suficiente para avaliar a eficácia das técnicas
-clássicas de PDI aplicadas ao problema.
+monitoramento urbano. O projeto pretende produzir
+uma versão simplificada e didática de um sistema para avaliar a eficácia das técnicas
+de PDI aplicadas ao problema.
 
 ## Objetivo geral
 
@@ -52,16 +52,16 @@ Ver detalhes em [`docs/proposta.md`](docs/proposta.md).
 
 ## Conjunto de imagens
 
-- Dataset público "Car Plate Detection" (Kaggle), com imagens anotadas em XML.
+- Dataset público [rodosol-alpr-dataset][https://github.com/raysonlaroca/rodosol-alpr-dataset/tree/main] (Github), com imagens anotadas em PNG.
 - Fotos próprias, complementando o dataset público com placas no padrão Mercosul.
 
 Detalhes de origem, licença e forma de obtenção em [`docs/proposta.md`](docs/proposta.md).
 
 ## Estágio atual do projeto (M1)
 
-- [ ] Definição do problema e escopo
-- [ ] Conjunto inicial de imagens selecionado
-- [ ] Pipeline preliminar definido
+- [x] Definição do problema e escopo
+- [x] Conjunto inicial de imagens selecionado
+- [x] Pipeline preliminar definido
 - [ ] Primeiros experimentos exploratórios (leitura/visualização das imagens)
 - [ ] Vídeo da M1 gravado
 
@@ -94,13 +94,14 @@ projeto-placas/
 
 ## Vídeo da M1
 
-Link: *[a adicionar]*
+Link:
 
 ## Uso de Inteligência Artificial generativa
 
-*A ser preenchido conforme o grupo utilize ferramentas de IA generativa durante o
-desenvolvimento (ferramenta, finalidade, material produzido, verificação feita).*
+Declaro que não utilizei ferramentas de Inteligência Artificial generativa na elaboração do código, dos testes, das imagens, do relatório ou de outros artefatos deste laboratório.
 
 ## Referências
 
-*A ser preenchida com literatura técnica, documentação e trabalhos relacionados.*
+
+- R. Laroca, E. V. Cardoso, D. R. Lucio, V. Estevam, and D. Menotti, "On the Cross-dataset Generalization in License Plate Recognition," International Conference on Computer Vision Theory and Applications (VISAPP), 2022.
+- Repositório do dataset RodoSol-ALPR: [https://github.com/raysonlaroca/rodosol-alpr-dataset](https://github.com/raysonlaroca/rodosol-alpr-dataset)
