@@ -1,0 +1,55 @@
+# === Build / compilação ===
+build/
+bin/
+obj/
+out/
+cmake-build-*/
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+
+# === CMake ===
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
+
+# === IDEs / editores ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# === Sistema operacional ===
+.DS_Store
+Thumbs.db
+
+# === Ambientes Python (caso usem para scripts/notebooks auxiliares) ===
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# === Dados grandes / gerados ===
+# Ajuste conforme o volume real do dataset — não versionar datasets grandes
+images/input/*
+!images/input/.gitkeep
+images/results/*
+!images/results/.gitkeep
+
+# === Modelos/pesos treinados (se vierem a ser usados) ===
+*.weights
+*.pt
+*.onnx
+
+# === Logs e arquivos temporários ===
+*.log
+*.tmp
