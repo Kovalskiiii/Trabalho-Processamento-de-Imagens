@@ -1,82 +1,114 @@
+Esse branch contém o pipeline inicial que foi usado como base para o trabalho finalizado no branch main.
 # ALPR didático — Projeto Aplicado Longitudinal (PDI, M2)
 
-**Problema:** localizar a placa de um veículo em uma imagem e segmentar/reconhecer seus caracteres (ALPR).  
-**Etapa:** M2 — implementação parcial com avaliação quantitativa contra a anotação do dataset.  
-**Integrantes:** José Vitor da Rosa (`j0se-R`), Kauã Kovalski de Campos (`Kovalskiiii`), Emanuel Muller Bueno (`Emanuel-Muller`).  
-**Tecnologias:** Python 3.10+ e OpenCV. *Mudança em relação à M1:* a proposta previa C++; o grupo passou para Python por maior facilidade de desenvolvimento e experimentação do grupo (OpenCV tem a mesma API em ambas).
+**Problema:** localizar a região de uma placa veicular e, futuramente, reconhecer seu texto (ALPR).  
+**Etapa:** M2 — implementação parcial de segmentação em recortes de placas.  
+**Integrantes:** José Vitor da Rosa (`j0se-R`), Kauã Kovalski de Campos (`Kovalskiiii`) e Emanuel Muller Bueno (`Emanuel-Muller`).
 
-## Estágio atual
+## Estado real da implementação
 
-| Etapa | Estado |
-|---|---|
-| Entrada: leitura de imagens + anotação (texto, layout, 4 cantos) | Implementado |
-| Detecção da placa (contornos + filtro geométrico), 2 configurações, IoU | Implementado, **resultado fraco** (ver relatório) |
-| Retificação por perspectiva | Implementado, **usando os cantos anotados** (entrada "oráculo"); estimar os cantos automaticamente é M3 |
-| Segmentação de caracteres (limiar fixo × Otsu × adaptativo → abertura → componentes) | Implementado e avaliado (erro de contagem vs. 7 caracteres) |
-| Descritores por componente (área, perímetro, caixa, aspecto, centroide) | Implementado (`results/descritores_componentes.csv`) |
-| Haar Cascade, OCR | Pendentes (M3) |
+A M2 acrescenta um pipeline executável para explorar a segmentação preliminar de caracteres em imagens de placas recortadas. O código processa uma imagem ou divide uma montagem regular em amostras, gera imagens intermediárias e compara duas configurações de limiarização:
 
-Resultado principal (17 imagens de avaliação, erro absoluto médio na contagem de caracteres): fixo 1,53 · Otsu 1,47 · **adaptativo 0,41**. Detalhes, falhas e limitações em [`docs/relatorio_m2.md`](docs/relatorio_m2.md).
+1. **Limiar fixo** (padrão 120).
+2. **Limiarização de Otsu**, que escolhe automaticamente um limiar global a partir do histograma.
+
+Ambas passam por escala de cinza, CLAHE, filtro Gaussiano, limiarização inversa, abertura morfológica e análise de componentes conexos. A saída inclui máscaras, visualizações dos componentes e `results/comparison.csv`.
+
+**Limitação importante:** o arquivo versionado `imagens/input/samples-cropped.png` é uma montagem de 20 recortes de placas, não um conjunto de fotos completas de veículos. Portanto, esta implementação não demonstra ainda a localização da placa em uma cena inteira nem o reconhecimento OCR. A divisão da montagem em grade é uma conveniência experimental, não uma etapa geral de detecção. A comparação atual é exploratória: não há máscaras de referência nem contagem manual validada dos caracteres, então contagem de componentes e proporção de pixels de primeiro plano são indicadores diagnósticos, não acurácia de segmentação.
+
+## Problema e objetivos atuais
+
+O objetivo final permanece detectar a placa em uma imagem de veículo, retificar sua perspectiva, segmentar caracteres e reconhecer o texto. Para M2, o escopo executável foi reduzido deliberadamente à exploração de limiarização, morfologia e componentes sobre recortes disponíveis. A localização em cenas completas, retificação, OCR e avaliação com ground truth continuam pendentes para M3.
 
 ## Dados
 
-Amostra de 26 imagens do RodoSol-ALPR (1280×720): 8 carros-br, 9 motos-br, 9 motos-me; 17 padrão brasileiro e 9 Mercosul. Origem, licença, seleção e divisão ajuste/avaliação estão em [`dataset/README.md`](dataset/README.md) e no relatório. **As imagens do dataset não são versionadas**; veja `dataset/README.md` para obtê-las e colocá-las em `dataset/`.
+- `imagens/input/samples-cropped.png`: montagem de 20 recortes de placas, resolução 1757 × 487 px.
+- O arquivo não fornece anotações de bounding boxes, máscaras de caracteres ou texto esperado por amostra.
+- Os recortes variam em iluminação, contraste, inclinação, desfoque e padrão de placa; são exemplos exploratórios e não devem ser tratados como amostra representativa de desempenho real.
+- O dataset RodoSol-ALPR é descrito em `docs/proposta.md`, mas não está incluído no ZIP. Antes de usá-lo, siga as condições de acesso/licença do repositório oficial; não publique imagens restritas nem placas pessoais sem autorização.
 
-## Instalação
+## Tecnologias e instalação
+
+- Python 3.10 ou superior
+- OpenCV (`opencv-python`)
+- NumPy
+
+Crie e ative um ambiente virtual se desejar e instale as dependências:
 
 ```bash
 python -m venv .venv
-# Windows PowerShell: .venv\Scripts\Activate.ps1   |   Linux/macOS: source .venv/bin/activate
+# Windows PowerShell:
+.venv\Scripts\Activate.ps1
+# Linux/macOS:
+source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
 ## Execução reproduzível
 
+Na raiz do repositório:
+
 ```bash
-python src/pipeline.py --dataset dataset --output results   # experimentos 1 e 2 (~1 min)
-python src/make_figures.py --results results --out docs/figs # figuras do relatório
+python src/pipeline.py --input imagens/input/samples-cropped.png --output results --split-grid 5 4
 ```
 
-Exemplo mínimo: com `dataset/cars-br/img_000004.jpg` (+ `.txt`) presente, `results/segmentacao/img_000004/` contém `01_placa_retificada.png`, `02_clahe.png`, `03_mascara_<método>.png`, `04_abertura_<método>.png` e `05_componentes_<método>.png`, e `results/metricas_segmentacao.csv` registra `n_detectado = 7` para os três métodos.
+O comando divide a montagem em 5 colunas × 4 linhas e processa 20 recortes. Para processar uma única imagem sem divisão:
 
-Saídas: `results/metricas_deteccao.csv`, `resumo_deteccao.csv`, `metricas_segmentacao.csv`, `resumo_segmentacao_por_conjunto.csv`, `resumo_segmentacao_por_tipo.csv`, `descritores_componentes.csv`, `split.csv`, e imagens em `results/deteccao/` e `results/segmentacao/`.
+```bash
+python src/pipeline.py --input caminho/para/placa.png --output results/unica
+```
 
-O experimento exploratório anterior (montagem de 20 recortes, sem referência) foi preservado em `src/exploratorio_montagem.py` e `results/exploratorio_montagem/` (roda com `imagens/input/samples-cropped.png`); não entra nas conclusões da M2.
+Para alterar o limiar fixo e a área mínima dos componentes:
+
+```bash
+python src/pipeline.py --input imagens/input/samples-cropped.png --output results_teste --split-grid 5 4 --threshold 100 --min-area 15
+```
+
+Cada amostra gera `01_gray.png`, `02_clahe.png`, máscaras e imagens de componentes. `comparison.csv` reúne o limiar usado, pixels de primeiro plano, percentual de primeiro plano e número de componentes com área igual ou superior à mínima.
+
+## Resultados M2
+
+O experimento inicial é documentado em [`docs/relatorio_m2.md`](docs/relatorio_m2.md), incluindo a comparação fixa × Otsu, interpretação e limitações. Resultados gerados localmente são artefatos reproduzíveis e podem ser regenerados pelo comando acima.
 
 ## Estrutura
 
 ```text
 .
-├── README.md  requirements.txt  .gitignore
-├── dataset/              # README + amostra local (imagens não versionadas)
-├── docs/                 # proposta.md, relatorio_m2.md, figs/
-├── imagens/input/        # montagem do experimento exploratório
-├── src/                  # pipeline.py, make_figures.py, exploratorio_montagem.py
-└── results/              # CSVs, deteccao/, segmentacao/, exploratorio_montagem/
+├── README.md
+├── requirements.txt
+├── docs/
+│   ├── proposta.md
+│   └── relatorio_m2.md
+├── imagens/input/
+│   └── samples-cropped.png
+├── src/
+│   └── pipeline.py
+└── results/                 # saídas do experimento de referência
+    ├── comparison.csv
+    └── sample_*/            # imagens intermediárias por recorte
 ```
 
 ## Evolução desde a M1 e feedback
 
-Ver seção 2 do relatório. **Pendente (grupo):** colar o feedback real recebido na M1 e a ação tomada para cada item.
+A proposta da M1 permanece como objetivo final, mas a M2 adiciona código executável e saídas verificáveis. Como o arquivo de entrada disponível contém apenas recortes, o experimento foi limitado à segmentação preliminar em vez de afirmar que a detecção de placas em cenas completas já está implementada. A proposta de comparar contornos com Haar Cascade continua pertinente, mas ainda não foi executada porque o repositório não contém imagens de veículos completos nem resultados anotados para avaliar detecção.
 
 ## Plano para M3
 
-Detecção automática dos cantos (para retificar sem oráculo), comparação com Haar Cascade, tratamento de placas pequenas/2 linhas, OCR (Tesseract) com avaliação por placa exata e erro por caractere, anotação de caixas de caracteres para IoU/Dice, ampliação do conjunto. Tarefas e responsáveis na seção 8 do relatório.
+1. **Dados e referência:** reunir um conjunto autorizado e documentar IDs, condições de aquisição, texto esperado e bounding boxes/máscaras manuais.
+2. **Detecção:** implementar e comparar contornos com filtragem geométrica e uma cascata apropriada, avaliando IoU ou taxa de localização correta.
+3. **Retificação:** usar cantos anotados ou estimados para gerar placas alinhadas.
+4. **Segmentação:** comparar parâmetros de limiarização e morfologia contra máscaras ou caixas de caracteres de referência.
+5. **OCR:** integrar Tesseract ou alternativa e avaliar correspondência exata da placa e taxa de erro por caractere.
+6. **Reprodutibilidade:** fixar versões, separar dados de ajuste e avaliação, registrar falhas e atualizar vídeo/relatório.
 
-## Contribuições
-
-A preencher pelo grupo, com evidências (tabela na seção 9 do relatório).
-
-## Vídeo M2
-
-Link do YouTube não listado: **a inserir após a gravação**.
 
 ## Uso de IA generativa
 
-Para a etapa M2, foi utilizado o Claude (Anthropic), na criação da estrutura de pastas do projeto e para redigir o documento "README.md".
+Este artefato foi preparado com assistência do ChatGPT (OpenAI) para estruturar/implementar o pipeline experimental e redigir documentação inicial.
 
 ## Referências
 
 - Laroca, R. et al. “On the Cross-dataset Generalization in License Plate Recognition.” VISAPP, 2022.
 - RodoSol-ALPR: https://github.com/raysonlaroca/rodosol-alpr-dataset
-- OpenCV: https://docs.opencv.org/ · Tesseract OCR: https://github.com/tesseract-ocr/tesseract
+- OpenCV: https://docs.opencv.org/
+- Tesseract OCR: https://github.com/tesseract-ocr/tesseract
