@@ -19,7 +19,17 @@ Localizar a placa de um veículo em uma imagem, retificar sua perspectiva, segme
 
 A etapa anterior desta M2 (montagem de 20 recortes sem anotação, comparação fixo × Otsu por contagem de pixels) foi preservada em `results/exploratorio_montagem/` e **não** sustenta conclusões, pois não tinha referência.
 
-**Resposta ao feedback da M1:** *[o grupo deve colar aqui o feedback real recebido e, para cada item, a ação tomada ou a justificativa técnica. Nenhum feedback foi fornecido ao material usado para redigir este relatório.]*
+**Resposta ao feedback da M1** (devolutiva do Grupo 7, nota 62,5/100, commit avaliado `92f6062`):
+
+| Orientação recebida | Ação tomada / justificativa | Evidência | Situação |
+|---|---|---|---|
+| Regularizar identificação (nomes no AVA) e vídeo | Integrantes identificados no README e na proposta; vídeo da M2 será gravado e linkado no README. **Nomes no AVA: o grupo deve regularizar.** | README | Parcial |
+| Confirmar acesso ao dataset; plano alternativo | Amostra de 26 imagens do RodoSol-ALPR obtida e usada; licença e não redistribuição documentadas | `dataset/README.md` | Atendido (amostra) |
+| Tratar primeiro apenas localização e retificação | **Parcialmente atendido.** Implementamos detecção (2 configurações, IoU) e retificação, mas a retificação usa cantos anotados. Também avançamos a segmentação, porque o enunciado da M2 pede foco em segmentação/morfologia/componentes. A detecção ficou fraca, e por isso é a prioridade da M3 | seções 5.1 e 5.2 | Parcial |
+| Separar métricas: IoU, taxa de localização e acerto de caracteres | IoU e taxa de localização (IoU ≥ 0,5) em `resumo_deteccao.csv`; contagem correta de caracteres em `resumo_segmentacao_*.csv`. Acerto por caractere (OCR) fica para a M3 | `results/` | Atendido, exceto OCR |
+| Localização em 30–50 imagens anotadas | **Não atendido integralmente:** foram 26 imagens (17 na avaliação de segmentação). Ampliar para ≥ 30 na M3 | `split.csv` | Parcial |
+| Distribuir autoria e commits durante a M2 | O histórico anterior tinha um só autor; os commits da M2 devem ser feitos por cada integrante sobre a sua parte (seção 9). Commits não medem participação isoladamente | histórico Git | **Pendente (grupo)** |
+| OCR só depois da região retificada estável | De acordo: OCR adiado para a M3, depois da retificação sem oráculo | seção 8 | Atendido |
 
 ## 3. Dados e protocolo experimental
 
@@ -104,23 +114,25 @@ Para M3: anotar caixas de caracteres em um subconjunto (revisadas por um segundo
 
 ## 8. Plano de conclusão para M3
 
+Divisão **proposta** (duas tarefas principais por integrante); deve ser confirmada pelo grupo antes da entrega.
+
 | Tarefa | Responsável | Evidência esperada |
 |---|---|---|
-| Estimar cantos da placa automaticamente (contornos/`minAreaRect`) e retificar sem oráculo | *a definir* | IoU dos cantos; imagens antes/depois |
-| Melhorar escolha do candidato e comparar com Haar Cascade | *a definir* | Tabela IoU/taxa de detecção; falhas |
-| Segmentação específica para placas de 2 linhas (moto) | *a definir* | Erro de contagem em motos |
-| Anotar caixas de caracteres (subconjunto) | *a definir* | CSV de anotações + revisão cruzada |
-| OCR (Tesseract) e avaliação | *a definir* | Placa exata e erro por caractere |
-| Ampliar amostra (incluindo carros Mercosul) | *a definir* | `split.csv` atualizado |
-| Atualizar relatório, README e vídeo | *a definir* | Vídeo não listado ~10 min |
+| Estimar cantos da placa automaticamente (contornos/`minAreaRect`) e retificar sem oráculo | Kauã  | IoU dos cantos; imagens antes/depois |
+| Melhorar escolha do candidato e comparar com Haar Cascade | José Vitor  | Tabela IoU/taxa de detecção; falhas |
+| Segmentação específica para placas de 2 linhas (moto) | Emanuel  | Erro de contagem em motos |
+| Anotar caixas de caracteres (subconjunto) | José Vitor anota, Emanuel revisa  | CSV de anotações + revisão cruzada |
+| OCR (Tesseract) e avaliação | Kauã  | Placa exata e erro por caractere |
+| Ampliar amostra (incluindo carros Mercosul) | Emanuel  | `split.csv` atualizado |
+| Atualizar relatório, README e vídeo | Todos (cada um grava e revisa a sua parte) | Vídeo não listado ~10 min |
 
 ## 9. Contribuições dos integrantes
 
 | Integrante | Contribuição efetiva | Evidência |
 |---|---|---|
-| José Vitor da Rosa | *a preencher pelo grupo* | arquivo/experimento/revisão |
-| Kauã Kovalski de Campos | *a preencher pelo grupo* | arquivo/experimento/revisão |
-| Emanuel Muller Bueno | *a preencher pelo grupo* | arquivo/experimento/revisão |
+| José Vitor da Rosa | *--* | *--* |
+| Kauã Kovalski de Campos | *--* | *--* |
+| Emanuel Muller Bueno | *--* | *--* |
 
 ## 10. Uso de IA generativa
 
