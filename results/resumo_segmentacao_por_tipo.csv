@@ -1,7 +1,0 @@
-tipo,config,n_imagens,erro_abs,acerto_exato
-car,adaptativo,8,0.0,1.0
-car,fixo,8,0.0,1.0
-car,otsu,8,0.0,1.0
-motorcycle,adaptativo,18,0.778,0.5
-motorcycle,fixo,18,2.333,0.333
-motorcycle,otsu,18,1.944,0.389
