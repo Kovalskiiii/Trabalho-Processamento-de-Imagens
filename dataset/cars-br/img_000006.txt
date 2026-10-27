@@ -1,0 +1,4 @@
+type: car
+plate: GJX9280
+layout: Brazilian
+corners: 484,457 620,459 621,503 484,501

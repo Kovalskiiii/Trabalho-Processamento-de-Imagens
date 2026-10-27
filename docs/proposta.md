@@ -63,6 +63,8 @@ texto da placa
 - **Anotações disponíveis:** cada imagem possui um arquivo de texto associado contendo o tipo do veículo, o layout da placa (Brasileiro ou Mercosul), o texto da placa e a posição (x, y) dos quatro cantos — útil tanto para treinar/validar a detecção quanto para gerar o ground truth da correção de perspectiva.
 - **Formato/resolução:** imagens no formato PNG, todas com resolução de 1.280 × 720 pixels.
 - **Restrições de uso e licença:** o dataset é distribuído **apenas para fins de pesquisa acadêmica**, sem uso comercial. O acesso não é direto: é necessário preencher um acordo de licença e enviá-lo por e-mail institucional (.edu ou equivalente) ao autor responsável, que em seguida fornece o link de download.
+- **Amostra usada na M2:** 26 imagens (8 carros-br, 9 motos-br, 9 motos-me), em `dataset/` localmente, sem versionamento (ver `dataset/README.md`).
+- **Amostra usada na M2:** 26 imagens (8 carros-br, 9 motos-br, 9 motos-me), em `dataset/` localmente, sem versionamento (ver `dataset/README.md`).
 - **Distribuição no repositório:** por se tratar de um dataset de acesso condicionado a acordo de licença e por conter placas reais, **as imagens não serão redistribuídas diretamente no repositório**. O `README.md` e este documento conterão instruções de como obter o dataset (link do repositório oficial e processo de solicitação de licença). Fotos próprias, quando usadas, serão as únicas imagens efetivamente versionadas.
 - **Citação:** caso o dataset seja utilizado nos resultados do projeto, o trabalho original deverá ser citado (R. Laroca et al., _"On the Cross-dataset Generalization in License Plate Recognition"_, VISAPP, 2022).
 
@@ -119,7 +121,9 @@ flowchart TB
     OUT --> LOG
 ```
 
-A solução será organizada em módulos separados em C++ (um por etapa do pipeline), permitindo testar e comparar abordagens alternativas (ex: trocar o método de detecção) sem alterar as demais etapas.
+A solução será organizada em funções/módulos separados (um por etapa do pipeline), permitindo testar e comparar abordagens alternativas (ex: trocar o método de detecção) sem alterar as demais etapas.
+
+> **Revisão M2:** a implementação passou de C++ para **Python + OpenCV**, por maior facilidade de desenvolvimento e experimentação do grupo. A API do OpenCV é equivalente, então os algoritmos e a arquitetura não mudam.
 
 ## 8. Estudo inicial de viabilidade
 
@@ -140,4 +144,4 @@ _Seção a ser complementada com demais literatura técnica e trabalhos relacion
 
 ## 10. Uso de Inteligência Artificial generativa
 
-Declaramos que não utilizamos ferramentas de Inteligência Artificial generativa na elaboração do código, dos testes, das imagens, do relatório ou de outros artefatos deste projeto.
+Para a etapa M2, foi utilizado o Claude (Anthropic), na criação da estrutura de pastas do projeto e para redigir o documento "README.md".

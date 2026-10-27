@@ -1,0 +1,4 @@
+type: motorcycle
+plate: MRH7545
+layout: Brazilian
+corners: 552,226 634,219 643,287 560,296

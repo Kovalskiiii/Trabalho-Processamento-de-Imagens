@@ -1,0 +1,4 @@
+type: motorcycle
+plate: PPE0B97
+layout: Mercosur
+corners: 578,126 635,122 639,172 582,177

@@ -1,0 +1,7 @@
+conjunto,config,n_imagens,erro_abs,acerto_exato
+ajuste,adaptativo,9,0.778,0.667
+ajuste,fixo,9,1.556,0.444
+ajuste,otsu,9,1.222,0.667
+avaliacao,adaptativo,17,0.412,0.647
+avaliacao,fixo,17,1.647,0.588
+avaliacao,otsu,17,1.412,0.529

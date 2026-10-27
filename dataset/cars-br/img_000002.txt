@@ -1,0 +1,4 @@
+type: car
+plate: PPC5431
+layout: Brazilian
+corners: 560,383 679,382 680,423 561,422

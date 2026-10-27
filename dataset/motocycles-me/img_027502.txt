@@ -1,0 +1,4 @@
+type: motorcycle
+plate: QRG4J82
+layout: Mercosur
+corners: 574,188 629,186 631,235 574,237

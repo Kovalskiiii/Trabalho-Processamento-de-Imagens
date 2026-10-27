@@ -1,0 +1,4 @@
+type: motorcycle
+plate: GZZ8751
+layout: Brazilian
+corners: 540,110 585,109 587,149 540,151

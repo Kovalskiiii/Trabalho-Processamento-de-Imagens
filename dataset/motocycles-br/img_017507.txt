@@ -1,0 +1,4 @@
+type: motorcycle
+plate: MRS2786
+layout: Brazilian
+corners: 575,123 632,115 638,163 581,172

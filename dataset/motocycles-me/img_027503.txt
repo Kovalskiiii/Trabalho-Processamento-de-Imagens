@@ -1,0 +1,4 @@
+type: motorcycle
+plate: QRF2C46
+layout: Mercosur
+corners: 562,138 616,137 617,182 564,186

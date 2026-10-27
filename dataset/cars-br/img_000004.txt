@@ -1,0 +1,4 @@
+type: car
+plate: OVK7900
+layout: Brazilian
+corners: 572,410 697,411 698,452 572,452
