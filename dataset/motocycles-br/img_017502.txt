@@ -1,4 +1,0 @@
-type: motorcycle
-plate: QRC2267
-layout: Brazilian
-corners: 593,132 655,129 656,182 595,184

@@ -1,4 +1,0 @@
-type: car
-plate: PJM6113
-layout: Brazilian
-corners: 520,416 641,417 643,456 520,454

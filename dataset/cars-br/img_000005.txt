@@ -1,4 +1,0 @@
-type: car
-plate: ODI9001
-layout: Brazilian
-corners: 403,369 533,371 534,415 403,415

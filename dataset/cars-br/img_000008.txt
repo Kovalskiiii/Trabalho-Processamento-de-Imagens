@@ -1,4 +1,0 @@
-type: car
-plate: ODT4111
-layout: Brazilian
-corners: 505,402 629,402 631,443 506,443

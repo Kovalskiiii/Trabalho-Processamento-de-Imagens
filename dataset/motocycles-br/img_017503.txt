@@ -1,4 +1,0 @@
-type: motorcycle
-plate: PPX1174
-layout: Brazilian
-corners: 577,164 642,162 642,217 579,219

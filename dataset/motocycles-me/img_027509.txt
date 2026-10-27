@@ -1,4 +1,0 @@
-type: motorcycle
-plate: ODT6A01
-layout: Mercosur
-corners: 678,364 778,356 784,443 682,453

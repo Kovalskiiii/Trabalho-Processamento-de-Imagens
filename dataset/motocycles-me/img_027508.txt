@@ -1,4 +1,0 @@
-type: motorcycle
-plate: ODR2I65
-layout: Mercosur
-corners: 723,418 826,410 832,503 728,510

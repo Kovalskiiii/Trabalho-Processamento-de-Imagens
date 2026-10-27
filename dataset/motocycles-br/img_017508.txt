@@ -1,4 +1,0 @@
-type: motorcycle
-plate: MTU3834
-layout: Brazilian
-corners: 567,91 611,94 611,127 567,125

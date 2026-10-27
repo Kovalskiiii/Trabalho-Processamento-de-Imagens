@@ -1,4 +1,0 @@
-type: motorcycle
-plate: MTV5G99
-layout: Mercosur
-corners: 637,229 725,239 717,319 627,309
