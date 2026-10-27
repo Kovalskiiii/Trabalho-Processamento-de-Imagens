@@ -1,8 +1,0 @@
-opencv-python>=4.8
-numpy>=1.24
-
-#python -m venv .venv
-#source .venv/bin/activate
-#python -m pip install -r requirements.txt
-#python src/pipeline.py --dataset dataset --output results
-#python src/make_figures.py --results results --out docs/figs
